@@ -52,7 +52,7 @@ import { ConfigService } from '@nestjs/config';
           type: 'topic', // Type of exchange
         },
       ],
-      uri: 'amqp://localhost:5672',
+      uri: 'amqp://guest:guest@localhost:5672',
       connectionInitOptions: { wait: true },
     }),
   ],

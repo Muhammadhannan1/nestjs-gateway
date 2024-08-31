@@ -13,10 +13,10 @@ export class AuthController {
     return this.authService.createUser(SignUpRequest);
   }
 
-  // @Post('/login')
-  // login(@Body() loginRequest :  loginRequestDTO) {
-  //   return this.authService.login(loginRequest);
-  // }
+  @Post('/login')
+  login(@Body() loginRequest: loginRequestDTO) {
+    return this.authService.login(loginRequest);
+  }
   // @Get('/getMe')
   // @UseGuards(JwtAuthGuard)
   // getMe(@Req() req:any ) {

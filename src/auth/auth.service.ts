@@ -14,18 +14,31 @@ export class AuthService {
 
   async createUser(payload: SignUpRequestDTO) {
     // const createUser = await lastValueFrom(this.authClient.send('signUp',payload))
-    const createUser = this.AmqpConnection.publish(
-      'auth_exchange',
-      'auth.signUp',
+
+    const createUser = await this.AmqpConnection.request({
+      exchange: 'auth_exchange',
+      routingKey: 'auth.signUp',
       payload,
-    );
-    console.log('payload', payload);
+      // timeout: 5000, // Timeout for waiting for a response
+    });
     return createUser;
+    // return {status:true,message:'User Created Successfully',createUser}; // Return the response back to the client
   }
 
-  //   async login(payload: loginRequestDTO) {
-  //     return await lastValueFrom(this.authClient.send('login', payload));
-  //   }
+  async login(payload: loginRequestDTO) {
+    try {
+      const loginUser = await this.AmqpConnection.request({
+        exchange: 'auth_exchange',
+        routingKey: 'auth.login',
+        payload,
+        // timeout: 5000, // Timeout for waiting for a response
+      });
+      return loginUser;
+      // return {status:true,message:'User Created Successfully',createUser}; // Return the response back to the client
+    } catch (error) {
+      throw new Error('Failed to login user');
+    }
+  }
 
   //   async getMe(user: any) {
   //     return await lastValueFrom(this.authClient.send('getMe', user.userId));
