@@ -40,11 +40,5 @@ export class AuthService {
     }
   }
 
-  //   async getMe(user: any) {
-  //     return await lastValueFrom(this.authClient.send('getMe', user.userId));
-  //   }
-  //   async getHello() {
-  //     this.authClient.emit('getHello', 'hello world');
-  //     return { msg: 'send hello' };
-  //   }
+  // async getUserDetails(){}
 }
